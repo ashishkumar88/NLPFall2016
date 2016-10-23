@@ -2,6 +2,7 @@ import re
 
 NOUNS = '(NN|NNS|NNP|NNPS)'
 VERBS = '(VB|VBD|VBG|VBN|VBP|VBZ)'
+NN_VB = '(NN|NNS|NNP|NNPS|VB|VBD|VBG|VBN|VBP|VBZ)'
 PREP = '(IN)'
 def checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	check1 = checkNVNAndNV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
@@ -16,7 +17,7 @@ def checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2PO
 	return result
 	
 def checkNVNAndNV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^(\s|.)*'+ NOUNS +'[^'+ NOUNS +']*'+ VERBS +'[^'+ VERBS +']*'+ NOUNS +'(\s|.)*$'
+	sentence1Pattern = '^' + '[^'+ VERBS +']*' + NOUNS +'[^'+ NOUNS +']*'+ VERBS +'[^'+ VERBS +']*'+ NOUNS +'[^'+ NN_VB +']*'+'$'
 	sentence2Pattern = '^(\s|.)*'+ NOUNS +'[^'+ NOUNS +']*'+ VERBS +'(\s|.)*$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
