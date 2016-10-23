@@ -4,9 +4,9 @@ NOUNS = '(NN|NNS|NNP|NNPS)'
 VERBS = '(VB|VBD|VBG|VBN|VBP|VBZ)'
 NN_VB = '(NN|NNS|NNP|NNPS|VB|VBD|VBG|VBN|VBP|VBZ)'
 NN_ADJ = '(NN|NNS|NNP|NNPS|JJ|JJR|JJS)'
-PR_VB = '(PRP|PRP$|VB|VBD|VBG|VBN|VBP|VBZ)'
-PR_ADJ = '(PRP|PRP$|JJ|JJR|JJS)'
-PR_NN = '(PRP|PRP$|NN|NNS|NNP|NNPS)'
+PR_VB = '(PRP|PRP\$|VB|VBD|VBG|VBN|VBP|VBZ)'
+PR_ADJ = '(PRP|PRP\$|JJ|JJR|JJS)'
+PR_NN = '(PRP|PRP\$|NN|NNS|NNP|NNPS)'
 PR_NN_VB = '(PRP|PRP\$|NN|NNS|NNP|NNPS|VB|VBD|VBG|VBN|VBP|VBZ)'
 PR_NN_ADJ = '(PRP|PRP\$|NN|NNS|NNP|NNPS|JJ|JJR|JJS)'
 PRONOUN = '(PRP|PRP\$)'
@@ -29,23 +29,28 @@ PR_SYN = {	'he' : set(['he','him','his','himself']),
 			'themselves' : set(['they','them','their','theirs', 'themselves']) }
 
 def checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	check1 = checkNVNAndNV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
-	check2 = checkNVNAndVN(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
-	check3 = checkPVPAndPV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
-	check4 = checkPVPAndVP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
-	check5 = checkPVNAndPV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
-	check6 = checkPVNAndVP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
-	check7 = checkNVPAndPV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
-	check8 = checkNVPAndVP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
-	check9 = checkNVNAndNA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
-	check10 = checkNVNAndAN(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
-	check11 = checkPVPAndPA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
-	check12 = checkPVPAndAP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
-	check13 = checkPVNAndPA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
-	check14 = checkPVNAndAP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
-	check15 = checkNVPAndPA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
-	check16 = checkNVPAndAP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
-	result = check1 or check2 or check3 or check4 or check5 or check6 or check7 or check8 or check9 or check10 or check11 or check12 or check13 or check14 or check15 or check16
+	result = False
+	try:
+		check1 = checkNVNAndNV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+		check2 = checkNVNAndVN(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+		check3 = checkPVPAndPV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+		check4 = checkPVPAndVP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+		check5 = checkPVNAndPV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+		check6 = checkPVNAndVP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+		check7 = checkNVPAndPV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+		check8 = checkNVPAndVP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+		check9 = checkNVNAndNA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+		check10 = checkNVNAndAN(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+		check11 = checkPVPAndPA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+		check12 = checkPVPAndAP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+		check13 = checkPVNAndPA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+		check14 = checkPVNAndAP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+		check15 = checkNVPAndPA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+		check16 = checkNVPAndAP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+		result = check1 or check2 or check3 or check4 or check5 or check6 or check7 or check8 or check9 or check10 or check11 or check12 or check13 or check14 or check15 or check16	
+	except Exception as e:
+		print ">>Exception :", e
+	
 	return result
 	
 def checkNVNAndNV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
