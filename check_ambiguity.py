@@ -3,7 +3,11 @@ import re
 NOUNS = '(NN|NNS|NNP|NNPS)'
 VERBS = '(VB|VBD|VBG|VBN|VBP|VBZ)'
 NN_VB = '(NN|NNS|NNP|NNPS|VB|VBD|VBG|VBN|VBP|VBZ)'
-PREP = '(IN)'
+PR_VB = '(PRP|PRP$|VB|VBD|VBG|VBN|VBP|VBZ)'
+PR_NN = '(PRP|PRP$|NN|NNS|NNP|NNPS)'
+PR_NN_VB = '(PRP|PRP$|NN|NNS|NNP|NNPS|VB|VBD|VBG|VBN|VBP|VBZ)'
+PRONOUN = '(PRP|PRP$)'
+
 def checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	check1 = checkNVNAndNV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
 	check2 = checkNVNAndVN(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
@@ -18,8 +22,8 @@ def checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2PO
 	
 def checkNVNAndNV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 
-	sentence1Pattern = '^' + '[^'+ VERBS +']*' + NOUNS +'[^'+ NOUNS +']*'+ VERBS +'[^'+ VERBS +']*'+ NOUNS +'[^'+ NN_VB +']*'+'$'
-	sentence2Pattern = '^' + '[^'+ VERBS +']*' + NOUNS +'[^'+ NOUNS +']*'+ VERBS + '[^'+ NN_VB +']*' + '$'
+	sentence1Pattern = '^' + '[^'+ PR_VB +']*' + NOUNS + '[^' + PR_NN + ']*' + VERBS + '[^' + PR_VB + ']*' + NOUNS + '[^' + PR_NN_VB + ']*' + '$'
+	sentence2Pattern = '^' + '[^'+ PR_VB +']*' + NOUNS +'[^'+ PR_NN +']*'+ VERBS + '[^' + PR_NN_VB + ']*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
@@ -29,8 +33,8 @@ def checkNVNAndNV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	return False
 	
 def checkNVNAndVN(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^' + '[^'+ VERBS +']*' + NOUNS + '[^'+ NOUNS +']*' + VERBS + '[^'+ VERBS +']*'+ NOUNS +'[^'+ NN_VB +']*'+'$'
-	sentence2Pattern = '^' + '[^'+ NOUNS +']*'+ VERBS + '[^'+ VERBS +']*' + NOUNS + '[^' + NN_VB + ']*' + '$'
+	sentence1Pattern = '^' + '[^'+ PR_VB +']*' + NOUNS + '[^' + PR_NN + ']*' + VERBS + '[^' + PR_VB + ']*' + NOUNS + '[^' + PR_NN_VB + ']*' + '$'
+	sentence2Pattern = '^' + '[^'+ PR_NN +']*' + VERBS + '[^' + PR_VB + ']*' + NOUNS + '[^' + PR_NN_VB + ']*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
@@ -40,67 +44,67 @@ def checkNVNAndVN(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	return False
 
 def checkPVPAndPV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^(\s|.)*'+ PREP +'[^'+ PREP +']*'+ VERBS +'[^'+ VERBS +']*'+ PREP +'(\s|.)*$'
-	sentence2Pattern = '^(\s|.)*'+ PREP +'[^'+ PREP +']*'+ VERBS +'(\s|.)*$'
+	sentence1Pattern = '^' + '[^' + NN_VB + ']*' + PRONOUN + '[^' + PR_NN + ']*' + VERBS + '[^' + NN_VB + ']*' + PRONOUN + '[^' + PR_NN_VB + ']*' + '$'
+	sentence2Pattern = '^' + '[^' + NN_VB + ']*' + PRONOUN + '[^' + PR_NN + ']*' + VERBS + '[^' + PR_NN_VB + ']*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		nounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PREP, " ".join(sentence1POSs)).group(0))]
+		nounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PRONOUN, " ".join(sentence1POSs)).group(0))]
 		if nounWordinSentence2 in sentence1Words:
 			return True
 	return False
 
 def checkPVPAndVP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^(\s|.)*'+ PREP +'[^'+ PREP +']*'+ VERBS +'[^'+ VERBS +']*'+ PREP +'(\s|.)*$'
-	sentence2Pattern = '^(\s|.)*'+ VERBS +'[^'+ VERBS +']*'+ PREP +'(\s|.)*$'
+	sentence1Pattern = '^' + '[^' + NN_VB + ']*' + PRONOUN + '[^' + PR_NN + ']*' + VERBS + '[^' + NN_VB + ']*' + PRONOUN + '[^' + PR_NN_VB + ']*' + '$'
+	sentence2Pattern = '^' + '[^' + PR_NN + ']*' + VERBS + '[^' + NN_VB + ']*' + PRONOUN + '[^' + PR_NN_VB + ']*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		nounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PREP, " ".join(sentence1POSs)).group(0))]
+		nounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PRONOUN, " ".join(sentence1POSs)).group(0))]
 		if nounWordinSentence2 in sentence1Words:
 			return True
 	return False
 
 def checkPVNAndPV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^(\s|.)*'+ PREP +'[^'+ PREP +']*'+ VERBS +'[^'+ VERBS +']*'+ NOUNS +'(\s|.)*$'
-	sentence2Pattern = '^(\s|.)*'+ PREP +'[^'+ PREP +']*'+ VERBS +'(\s|.)*$'
+	sentence1Pattern = '^' + '[^' + NN_VB + ']*' + PRONOUN + '[^' + PR_NN + ']*' + VERBS + '[^' + PR_VB + ']*' + NOUNS + '[^' + PR_NN_VB + ']*' + '$'
+	sentence2Pattern = '^' + '[^' + NN_VB + ']*' + PRONOUN + '[^' + PR_NN + ']*' + VERBS + '[^' + PR_NN_VB + ']*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		nounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PREP, " ".join(sentence1POSs)).group(0))]
+		nounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PRONOUN, " ".join(sentence1POSs)).group(0))]
 		if nounWordinSentence2 in sentence1Words:
 			return True
 	return False
 
 def checkPVNAndVP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^(\s|.)*'+ PREP +'[^'+ PREP +']*'+ VERBS +'[^'+ VERBS +']*'+ NOUNS +'(\s|.)*$'
-	sentence2Pattern = '^(\s|.)*'+ VERBS +'[^'+ VERBS +']*'+ PREP +'(\s|.)*$'
+	sentence1Pattern = '^' + '[^' + NN_VB + ']*' + PRONOUN + '[^' + PR_NN + ']*' + VERBS + '[^' + PR_VB + ']*' + NOUNS + '[^' + PR_NN_VB + ']*' + '$'
+	sentence2Pattern = '^' + '[^' + PR_NN + ']*' +  VERBS + '[^' + NN_VB + ']*' + PRONOUN + '[^' + PR_NN_VB + ']*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		nounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PREP, " ".join(sentence1POSs)).group(0))]
+		nounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PRONOUN, " ".join(sentence1POSs)).group(0))]
 		if nounWordinSentence2 in sentence1Words:
 			return True
 	return False
 
 def checkNVPAndPV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^(\s|.)*'+ NOUNS +'[^'+ NOUNS +']*'+ VERBS +'[^'+ VERBS +']*'+ PREP +'(\s|.)*$'
-	sentence2Pattern = '^(\s|.)*'+ PREP +'[^'+ NOUNS +']*'+ VERBS +'(\s|.)*$'
+	sentence1Pattern = '^' + '[^' + PR_VB + ']*' + NOUNS + '[^' + NN_VB + ']*' + VERBS + '[^'+ PR_VB +']*' + PRONOUN + '[^' + PR_NN_VB + ']*' + '$'
+	sentence2Pattern = '^' + '[^' + NN_VB + ']*' + PRONOUN + '[^' + PR_NN + ']*' + VERBS + '[^' + PR_NN_VB + ']*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		nounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PREP, " ".join(sentence1POSs)).group(0))]
+		nounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PRONOUN, " ".join(sentence1POSs)).group(0))]
 		if nounWordinSentence2 in sentence1Words:
 			return True
 	return False
 
 def checkNVPAndVP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^(\s|.)*'+ NOUNS +'[^'+ NOUNS +']*'+ VERBS +'[^'+ VERBS +']*'+ PREP +'(\s|.)*$'
-	sentence2Pattern = '^(\s|.)*'+ VERBS +'[^'+ VERBS +']*'+ PREP +'(\s|.)*$'
+	sentence1Pattern = '^' + '[^' + PR_VB + ']*' + NOUNS + '[^' + NN_VB + ']*' + VERBS + '[^'+ PR_VB +']*' + PRONOUN + '[^' + PR_NN_VB + ']*' + '$'
+	sentence2Pattern = '^' + '[^' + PR_NN + ']*' +  VERBS + '[^' + NN_VB + ']*' + PRONOUN + '[^' + PR_NN_VB + ']*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		nounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PREP, " ".join(sentence1POSs)).group(0))]
+		nounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PRONOUN, " ".join(sentence1POSs)).group(0))]
 		if nounWordinSentence2 in sentence1Words:
 			return True
 	return False
