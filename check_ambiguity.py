@@ -289,3 +289,24 @@ if __name__ == "__main__":
 	sentence2POSs = ['NN', 'JJ']
 	print checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
 	
+	
+	sentence1Words = ['kevin', 'yelled', 'at', 'john']
+	sentence1POSs = ['NNP', 'VBD', 'IN', 'NN']
+	sentence2Words = ['john', 'ran']
+	sentence2POSs = ['NN', 'VBD']
+	print checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+	
+	
+	sentence1Words = ['he', 'yelled', 'at', 'him']
+	sentence1POSs = ['NNP', 'VBD', 'IN', 'NN']
+	sentence2Words = ['he', 'upset']
+	sentence2POSs = ['NN', 'JJ']
+	print checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+	
+	
+	sentence1Words = ['he', 'yelled', 'at', 'him']
+	sentence1POSs = ['NNP', 'VBD', 'IN', 'NN']
+	sentence2Words = ['he', 'ran']
+	sentence2POSs = ['NN', 'VBD']
+	print checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
+	
