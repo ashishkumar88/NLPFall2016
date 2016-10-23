@@ -19,7 +19,7 @@ def checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2PO
 def checkNVNAndNV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 
 	sentence1Pattern = '^' + '[^'+ VERBS +']*' + NOUNS +'[^'+ NOUNS +']*'+ VERBS +'[^'+ VERBS +']*'+ NOUNS +'[^'+ NN_VB +']*'+'$'
-	sentence2Pattern = '^(\s|.)*'+ NOUNS +'[^'+ NOUNS +']*'+ VERBS +'(\s|.)*$'
+	sentence2Pattern = '^' + '[^'+ VERBS +']*' + NOUNS +'[^'+ NOUNS +']*'+ VERBS + '[^'+ NN_VB +']*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
@@ -29,8 +29,8 @@ def checkNVNAndNV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	return False
 	
 def checkNVNAndVN(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^(\s|.)*'+ NOUNS +'[^'+ NOUNS +']*'+ VERBS +'[^'+ VERBS +']*'+ NOUNS +'(\s|.)*$'
-	sentence2Pattern = '^(\s|.)*'+ VERBS +'[^'+ VERBS +']*'+ NOUNS +'(\s|.)*$'
+	sentence1Pattern = '^' + '[^'+ VERBS +']*' + NOUNS + '[^'+ NOUNS +']*' + VERBS + '[^'+ VERBS +']*'+ NOUNS +'[^'+ NN_VB +']*'+'$'
+	sentence2Pattern = '^' + '[^'+ NOUNS +']*'+ VERBS + '[^'+ VERBS +']*' + NOUNS + '[^' + NN_VB + ']*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
