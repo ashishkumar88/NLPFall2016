@@ -17,7 +17,7 @@ def checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2PO
 	return result
 	
 def checkNVNAndNV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^' + '[^'+ VERBS +']*' + NOUNS +'[^'+ NOUNS +']*'+ VERBS +'[^'+ VERBS +']*'+ NOUNS +'[^'+ NN_VB +']*'+'$'
+	sentence1Pattern = '^(\s|.)*' + '[^'+ VERBS +']*' + NOUNS +'[^'+ NOUNS +']*'+ VERBS +'[^'+ VERBS +']*'+ NOUNS +'[^'+ VERBS+'|'+NOUNS +']*'+'$'
 	sentence2Pattern = '^(\s|.)*'+ NOUNS +'[^'+ NOUNS +']*'+ VERBS +'(\s|.)*$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
