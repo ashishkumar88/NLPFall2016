@@ -315,54 +315,75 @@ def checkNVPAndAP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 
 class TestSentences(unittest.TestCase):
 
-    def test_case1(self):
+    def test_case_1(self):
     	sentence1Words = ['kevin', 'yelled', 'at', 'john']
     	sentence1POSs = ['NNP', 'VBD', 'IN', 'NN']
     	sentence2Words = ['john', 'upset']
     	sentence2POSs = ['NN', 'JJ']
     	self.assertTrue(checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs))
 
-    def test_case2(self):
+    def test_case_2(self):
     	sentence1Words = ['kevin', 'yelled', 'at', 'john']
     	sentence1POSs = ['NNP', 'VBD', 'IN', 'NN']
     	sentence2Words = ['john', 'ran']
     	sentence2POSs = ['NN', 'VBD']
     	self.assertTrue(checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs))
     
-    def test_case3(self):
+    def test_case_3(self):
     	sentence1Words = ['he', 'yelled', 'at', 'him']
     	sentence1POSs = ['PRP', 'VBD', 'IN', 'PRP']
     	sentence2Words = ['he', 'upset']
     	sentence2POSs = ['PRP', 'JJ']
     	self.assertFalse(checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs))
 
-    def test_case4(self):
+    def test_case_4(self):
     	sentence1Words = ['he', 'yelled', 'at', 'him']
     	sentence1POSs = ['PRP', 'VBD', 'IN', 'PRP']
     	sentence2Words = ['he', 'ran']
     	sentence2POSs = ['PRP', 'VBD']
     	self.assertFalse(checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs))
 
-    def test_case5(self):
+    def test_case_5(self):
     	sentence1Words = ['kevin', 'yelled', 'at', 'him']
     	sentence1POSs = ['NN', 'VBD', 'IN', 'PRP']
     	sentence2Words = ['he', 'ran']
     	sentence2POSs = ['PRP', 'VBD']
     	self.assertTrue(checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs))
 
-    def test_case6(self):
+    def test_case_6(self):
     	sentence1Words = ['the', 'sculpture', 'rolled', 'off', 'the', 'shelf']
     	sentence1POSs = ['DT', 'NN', 'VBD', 'RP', 'DT', 'NN']
     	sentence2Words = ['it', 'not', 'anchored']
     	sentence2POSs = ['PRP', 'RB', 'VBN']
     	self.assertFalse(checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs))
 
-    def test_case7(self):
+    def test_case_7(self):
     	sentence1Words = ['the', 'sculpture', 'rolled', 'off', 'the', 'shelf']
     	sentence1POSs = ['DT', 'NN', 'VBD', 'RP', 'DT', 'NN']
     	sentence2Words = ['the','sculpture', 'not', 'anchored']
     	sentence2POSs = ['DT', 'NN', 'RB', 'VBN']
     	self.assertTrue(checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs))
+
+    def test_case_8(self):
+    	sentence1Words = ['trophy', 'not', 'fit', 'in', 'brown', 'suitcase']
+    	sentence1POSs = ['NN', 'RB', 'VB', 'IN', 'JJ', 'NN']
+    	sentence2Words = ['trophy', 'too', 'big']
+    	sentence2POSs = ['NN', 'RB', 'JJ']
+    	self.assertTrue(checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs))
+
+    def test_case_9(self):
+    	sentence1Words = ['trophy', 'not', 'fit', 'in', 'brown', 'suitcase']
+    	sentence1POSs = ['NN', 'RB', 'VB', 'IN', 'JJ', 'NN']
+    	sentence2Words = ['suitcase', 'too', 'small']
+    	sentence2POSs = ['NN', 'RB', 'JJ']
+    	self.assertTrue(checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs))
+
+    def test_case_10(self):
+    	sentence1Words = ['trophy', 'not', 'fit', 'in', 'brown', 'suitcase']
+    	sentence1POSs = ['NN', 'RB', 'VB', 'IN', 'JJ', 'NN']
+    	sentence2Words = ['it', 'too', 'small']
+    	sentence2POSs = ['PRP', 'RB', 'JJ']
+    	self.assertFalse(checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs))
 
 
 if __name__ == '__main__':
