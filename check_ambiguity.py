@@ -79,8 +79,8 @@ def checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2PO
 	
 def checkNVNAndNV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	#print 'here'
-	sentence1Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
-	sentence2Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS +'(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*'+ VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence2Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS +'(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*'+ VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	#print searchObj1 , searchObj2
@@ -94,8 +94,8 @@ def checkNVNAndNV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	return False
 	
 def checkNVNAndVN(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
-	sentence2Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence2Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
@@ -116,8 +116,8 @@ def exists(sentenceWord, pronounWordinSentence2):
 	return False
 
 def checkPVPAndPV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
-	sentence2Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence2Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
@@ -130,8 +130,8 @@ def checkPVPAndPV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	return False
 
 def checkPVPAndVP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
-	sentence2Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence2Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
@@ -144,8 +144,8 @@ def checkPVPAndVP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	return False
 
 def checkPVNAndPV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
-	sentence2Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence2Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
@@ -158,8 +158,8 @@ def checkPVNAndPV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	return False
 
 def checkPVNAndVP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
-	sentence2Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' +  VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence2Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' +  VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
@@ -172,8 +172,8 @@ def checkPVNAndVP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	return False
 
 def checkNVPAndPV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
-	sentence2Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence2Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
@@ -186,8 +186,8 @@ def checkNVPAndPV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	return False
 
 def checkNVPAndVP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
-	sentence2Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' +  VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence2Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' +  VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
@@ -201,8 +201,8 @@ def checkNVPAndVP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	
 	
 def checkNVNAndNA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
-	sentence2Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS +'(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*'+ ADJ + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence2Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS +'(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*'+ ADJ + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
@@ -215,8 +215,8 @@ def checkNVNAndNA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	return False
 	
 def checkNVNAndAN(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
-	sentence2Pattern = '^' + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + ADJ + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence2Pattern = '^' + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + ADJ + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
@@ -229,8 +229,8 @@ def checkNVNAndAN(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	return False
 
 def checkPVPAndPA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
-	sentence2Pattern = '^' + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + ADJ + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence2Pattern = '^' + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + ADJ + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
@@ -243,8 +243,8 @@ def checkPVPAndPA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	return False
 
 def checkPVPAndAP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
-	sentence2Pattern = '^' + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + ADJ + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence2Pattern = '^' + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + ADJ + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
@@ -257,8 +257,8 @@ def checkPVPAndAP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	return False
 
 def checkPVNAndPA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
-	sentence2Pattern = '^' + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + ADJ + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence2Pattern = '^' + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + ADJ + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
@@ -271,8 +271,8 @@ def checkPVNAndPA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	return False
 
 def checkPVNAndAP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
-	sentence2Pattern = '^' + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' +  ADJ + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence2Pattern = '^' + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' +  ADJ + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
@@ -285,8 +285,8 @@ def checkPVNAndAP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	return False
 
 def checkNVPAndPA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
-	sentence2Pattern = '^' + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + ADJ + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence2Pattern = '^' + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + ADJ + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
@@ -299,8 +299,8 @@ def checkNVPAndPA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	return False
 
 def checkNVPAndAP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
-	sentence1Pattern = '^' + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
-	sentence2Pattern = '^' + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' +  ADJ + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
+	sentence2Pattern = '^' + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' +  ADJ + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + PRONOUN + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
