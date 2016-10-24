@@ -313,7 +313,7 @@ def checkNVPAndAP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	return False	
 
 
-class TestStringMethods(unittest.TestCase):
+class TestSentences(unittest.TestCase):
 
     def test_case1(self):
     	sentence1Words = ['kevin', 'yelled', 'at', 'john']
