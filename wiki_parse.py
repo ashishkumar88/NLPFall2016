@@ -8,7 +8,7 @@ connectors = ['therefore', 'as a consequence', 'for this reason', 'for all these
 
 def getTags(sen_arr):
 	tag_arr = []
-	st = StanfordPOSTagger('english-bidirectional-distsim.tagger')
+	st = StanfordPOSTagger('english-left3words-distsim.tagger')
 	res = st.tag(sen_arr)
 	for i in res:
 		tag = i[1].encode("utf-8")
