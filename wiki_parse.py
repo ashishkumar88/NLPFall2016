@@ -10,32 +10,38 @@ def getTags(sen_arr):
 	tag_arr = []
 	st = StanfordPOSTagger('english-bidirectional-distsim.tagger')
 	res = st.tag(sen_arr)
-	print res
 	for i in res:
 		tag = i[1].encode("utf-8")
 		tag_arr.append(tag)
 
 	return tag_arr
 
-def isValid(sen1_arr, sen1_tags, sen2_arr, sen2_tags):
+def isValid(sen1_arr, sen2_arr):
 	sen1_arr_t = []
 	sen1_tags_t = []
 	sen2_arr_t = []
 	sen2_tags_t = []
+
+	sen1_tags = []
+	sen2_tags = []
+	sen1_tags = getTags(sen1_arr)
+	sen2_tags = getTags(sen2_arr)
+
 	for i,v in enumerate(sen1_arr):
 		if v in aux_verbs :
 			continue
 		sen1_arr_t.append(v)
+		sen1_tags_t.append(sen1_tags[i])
 
 	for i,v in enumerate(sen2_arr):
 		if v in aux_verbs :
 			continue
 		sen2_arr_t.append(v)
+		sen2_tags_t.append(sen2_tags[i])
 
-	sen1_tags_t = ' '.join(sen1_tags_t).strip()
-	sen2_tags_t = ' '.join(sen2_tags_t).strip()
-	sen1_tags_t = getTags(sen1_arr_t)
-	sen2_tags_t = getTags(sen2_arr_t)
+	#sen1_tags_t = ' '.join(sen1_tags_t).strip()
+	#sen2_tags_t = ' '.join(sen2_tags_t).strip()
+
 
 	result = ca.checkIfUnambigous(sen1_arr_t, sen1_tags_t, sen2_arr_t, sen2_tags_t)
 
@@ -55,11 +61,9 @@ def printCheck(sentence):
 		if i in sentence:
 			sentences = sentence.split(i.strip())
 			sen1_arr  = sentences[0].strip().split(' ')
-			sen1_tags = []
-			sen2_arr  = sentences[0].strip().split(' ')
-			sen2_tags = []
+			sen2_arr  = sentences[1].strip().split(' ')
 
-			if isValid(sen1_arr, sen1_tags, sen2_arr, sen2_tags) == False:
+			if isValid(sen1_arr, sen2_arr) == False:
 				continue
 			return True
 	return False
@@ -73,9 +77,11 @@ def crawlFilesAndCreateTaggedSentences():
 				if filename.endswith(".txt"):
 					with open(os.path.join(root,filename)) as f :
 						for line in f :
+							line = line.replace('\n','')
+							if(line[len(line)-1] == '.'):
+								line = line[0:len(line)-1]
 							if printCheck(line):
-								line = line.replace(',','').replace('-', '').replace('"', '').replace(':', '').strp()
-								print line
+								line = line.replace(',','').replace('-', '').replace('"', '').replace(':', '').strip()
 								output.write(line)
 
 if __name__ == '__main__':

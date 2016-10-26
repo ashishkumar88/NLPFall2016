@@ -36,6 +36,7 @@ def verbose(check, str):
 		pass
 
 def checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
+	print sentence1Words, sentence1POSs, sentence2Words, sentence2POSs
 	result = False
 	#try:
 	check1 = checkNVNAndNV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
@@ -71,12 +72,12 @@ def checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2PO
 	check16 = checkNVPAndAP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs)
 	verbose(check16, 'checkNVPAndAP')
 
-	result = check1 or check2 or check3 or check4 or check5 or check6 or check7 or check8 or check9 or check10 or check11 or check12 or check13 or check14 or check15 or check16	
+	result = check1 or check2 or check3 or check4 or check5 or check6 or check7 or check8 or check9 or check10 or check11 or check12 or check13 or check14 or check15 or check16
 	# except Exception as e:
 	# 	print ">>Exception :", e
-	
+	print result
 	return result
-	
+
 def checkNVNAndNV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	#print 'here'
 	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
@@ -85,22 +86,24 @@ def checkNVNAndNV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	#print searchObj1 , searchObj2
 	if searchObj1 and searchObj2:
-		nounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(NOUNS, " ".join(sentence1POSs)).group(0))]
-		
+		val = list(set(NOUNS[1:len(NOUNS)-1].split('|')).intersection(sentence1POSs))[0]
+		nounWordinSentence2 = sentence2Words[sentence2POSs.index(val)]
+
 		multiple = [1 for i in sentence1Words if nounWordinSentence2.strip() == i.strip()]
 		if len(multiple) == 1:
 			return True
-			
+
 	return False
-	
+
 def checkNVNAndVN(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	sentence2Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		nounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(NOUNS, " ".join(sentence1POSs)).group(0))]
-		
+		val = list(set(NOUNS[1:len(NOUNS)-1].split('|')).intersection(sentence1POSs))[0]
+		nounWordinSentence2 = sentence2Words[sentence2POSs.index(val)]
+
 		multiple = [1 for i in sentence1Words if nounWordinSentence2.strip() == i.strip()]
 		if len(multiple) == 1:
 			return True
@@ -121,7 +124,8 @@ def checkPVPAndPV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PRONOUN, " ".join(sentence1POSs)).group(0))]
+		val = list(set(['PRP','PRP$']).intersection(sentence2POSs))[0]
+		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(val)]
 
 		multiple = [1 for i in sentence1Words if exists(pronounWordinSentence2, i)]
 		if len(multiple) == 1:
@@ -135,8 +139,9 @@ def checkPVPAndVP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PRONOUN, " ".join(sentence1POSs)).group(0))]
-		
+		val = list(set(['PRP','PRP$']).intersection(sentence2POSs))[0]
+		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(val)]
+
 		multiple = [1 for i in sentence1Words if exists(pronounWordinSentence2, i)]
 		if len(multiple) == 1:
 			return True
@@ -149,8 +154,9 @@ def checkPVNAndPV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PRONOUN, " ".join(sentence1POSs)).group(0))]
-		
+		val = list(set(['PRP','PRP$']).intersection(sentence2POSs))[0]
+		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(val)]
+
 		multiple = [1 for i in sentence1Words if exists(pronounWordinSentence2, i)]
 		if len(multiple) == 1:
 			return True
@@ -163,8 +169,9 @@ def checkPVNAndVP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PRONOUN, " ".join(sentence1POSs)).group(0))]
-		
+		val = list(set(['PRP','PRP$']).intersection(sentence2POSs))[0]
+		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(val)]
+
 		multiple = [1 for i in sentence1Words if exists(pronounWordinSentence2, i)]
 		if len(multiple) == 1:
 			return True
@@ -177,8 +184,9 @@ def checkNVPAndPV(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PRONOUN, " ".join(sentence1POSs)).group(0))]
-		
+		val = list(set(['PRP','PRP$']).intersection(sentence2POSs))[0]
+		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(val)]
+
 		multiple = [1 for i in sentence1Words if exists(pronounWordinSentence2, i)]
 		if len(multiple) == 1:
 			return True
@@ -191,37 +199,39 @@ def checkNVPAndVP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PRONOUN, " ".join(sentence1POSs)).group(0))]
-		
+		val = list(set(['PRP','PRP$']).intersection(sentence2POSs))[0]
+		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(val)]
+
 		multiple = [1 for i in sentence1Words if exists(pronounWordinSentence2, i)]
 		if len(multiple) == 1:
 			return True
 
 	return False
-	
-	
+
+
 def checkNVNAndNA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	sentence2Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS +'(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*'+ ADJ + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		nounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(NOUNS, " ".join(sentence1POSs)).group(0))]
-		
+		val = list(set(NOUNS[1:len(NOUNS)-1].split('|')).intersection(sentence1POSs))[0]
+		nounWordinSentence2 = sentence2Words[sentence2POSs.index(val)]
 		multiple = [1 for i in sentence1Words if nounWordinSentence2.strip() == i.strip()]
 		if len(multiple) == 1:
 			return True
-			
+
 	return False
-	
+
 def checkNVNAndAN(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	sentence1Pattern = '^' + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + VERBS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|JJ|JJR|JJS|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	sentence2Pattern = '^' + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + ADJ + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + NOUNS + '(IN|DT|LS|MD|PDT|POS|RB|RBR|RBS|RP|SYM|TO|UH|WDT|WP|WP\$|WRB|\s)*' + '$'
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		nounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(NOUNS, " ".join(sentence1POSs)).group(0))]
-		
+		val = list(set(NOUNS[1:len(NOUNS)-1].split('|')).intersection(sentence1POSs))[0]
+		nounWordinSentence2 = sentence2Words[sentence2POSs.index(val)]
+
 		multiple = [1 for i in sentence1Words if nounWordinSentence2.strip() == i.strip()]
 		if len(multiple) == 1:
 			return True
@@ -234,8 +244,9 @@ def checkPVPAndPA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PRONOUN, " ".join(sentence1POSs)).group(0))]
-		
+		val = list(set(['PRP','PRP$']).intersection(sentence2POSs))[0]
+		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(val)]
+
 		multiple = [1 for i in sentence1Words if exists(pronounWordinSentence2, i)]
 		if len(multiple) == 1:
 			return True
@@ -248,8 +259,9 @@ def checkPVPAndAP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PRONOUN, " ".join(sentence1POSs)).group(0))]
-		
+		val = list(set(['PRP','PRP$']).intersection(sentence2POSs))[0]
+		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(val)]
+
 		multiple = [1 for i in sentence1Words if exists(pronounWordinSentence2, i)]
 		if len(multiple) == 1:
 			return True
@@ -262,8 +274,9 @@ def checkPVNAndPA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PRONOUN, " ".join(sentence1POSs)).group(0))]
-		
+		val = list(set(['PRP','PRP$']).intersection(sentence2POSs))[0]
+		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(val)]
+
 		multiple = [1 for i in sentence1Words if exists(pronounWordinSentence2, i)]
 		if len(multiple) == 1:
 			return True
@@ -276,8 +289,9 @@ def checkPVNAndAP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PRONOUN, " ".join(sentence1POSs)).group(0))]
-		
+		val = list(set(['PRP','PRP$']).intersection(sentence2POSs))[0]
+		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(val)]
+
 		multiple = [1 for i in sentence1Words if exists(pronounWordinSentence2, i)]
 		if len(multiple) == 1:
 			return True
@@ -290,8 +304,9 @@ def checkNVPAndPA(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PRONOUN, " ".join(sentence1POSs)).group(0))]
-		
+		val = list(set(['PRP','PRP$']).intersection(sentence2POSs))[0]
+		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(val)]
+
 		multiple = [1 for i in sentence1Words if exists(pronounWordinSentence2, i)]
 		if len(multiple) == 1:
 			return True
@@ -304,13 +319,14 @@ def checkNVPAndAP(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs):
 	searchObj1 = re.search(sentence1Pattern, " ".join(sentence1POSs))
 	searchObj2 = re.search(sentence2Pattern, " ".join(sentence2POSs))
 	if searchObj1 and searchObj2:
-		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(re.search(PRONOUN, " ".join(sentence1POSs)).group(0))]
-		
+		val = list(set(['PRP','PRP$']).intersection(sentence2POSs))[0]
+		pronounWordinSentence2 = sentence2Words[sentence2POSs.index(val)]
+
 		multiple = [1 for i in sentence1Words if exists(pronounWordinSentence2, i)]
 		if len(multiple) == 1:
 			return True
 
-	return False	
+	return False
 
 
 class TestSentences(unittest.TestCase):
@@ -328,7 +344,7 @@ class TestSentences(unittest.TestCase):
     	sentence2Words = ['john', 'ran']
     	sentence2POSs = ['NN', 'VBD']
     	self.assertTrue(checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs))
-    
+
     def test_case_3(self):
     	sentence1Words = ['he', 'yelled', 'at', 'him']
     	sentence1POSs = ['PRP', 'VBD', 'IN', 'PRP']
@@ -384,6 +400,13 @@ class TestSentences(unittest.TestCase):
     	sentence2Words = ['it', 'too', 'small']
     	sentence2POSs = ['PRP', 'RB', 'JJ']
     	self.assertFalse(checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs))
+
+    # def test_case_11(self):
+    # 	sentence1Words = ['I', 'like', 'Tom']
+    # 	sentence1POSs = ['NN', 'RB', 'VB', 'IN', 'JJ', 'NN']
+    # 	sentence2Words = ['it', 'too', 'small']
+    # 	sentence2POSs = ['PRP', 'RB', 'JJ']
+    # 	self.assertFalse(checkIfUnambigous(sentence1Words, sentence1POSs, sentence2Words, sentence2POSs))
 
 
 if __name__ == '__main__':
