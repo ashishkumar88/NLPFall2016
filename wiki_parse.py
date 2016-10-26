@@ -1,8 +1,18 @@
 import re
 import check_ambiguity as ca
+from nltk.tag.stanford import StanfordPOSTagger
 
 aux_verbs = ['am', 'is', 'are' ,'was' ,'were', 'being', 'been', 'does', 'do', 'did' , 'has', 'have', 'had' , 'having' , 'can', 'could', 'may', 'might', 'must', 'ought to', 'shall', 'should', 'will', 'would']
-connectors = ['therefore', 'as a consequence', 'for this reason', 'for all these reasons', 'thus', 'because', 'because of', 'since', 'on account of', 'due to', 'for the reason', 'so, that', 'so that', 'so', 'when']
+connectors = ['therefore', 'as a consequence', 'for this reason', 'for all these reasons', 'thus', 'because', 'because of', 'since', 'on account of', 'due to', 'for the reason', 'so, that', 'so that']
+
+def getTags(sen_arr):
+	tag_arr = []
+	st = StanfordPOSTagger(' '.join(sen_arr).srtip())
+	for i in st:
+		tag = i[1].encode("utf-8")
+		tag_arr.append(tag)
+
+	return tag_arr
 
 def isValid(sen1_arr, sen1_tags, sen2_arr, sen2_tags):
 	sen1_arr_t = []
@@ -37,6 +47,9 @@ def isValid(sen1_arr, sen1_tags, sen2_arr, sen2_tags):
 	# search3 = re.search('^[^(VB)]*(VB)[^(VB)]*$',sen2_tags_t)
 	# if search1 and (search2 or search3):
 	# 	return True
+	
+	sen1_tags_t = getTags(sen1_arr_t)
+	sen2_tags_t = getTags(sen2_arr_t) 
 	
 	result = ca.checkIfUnambigous(sen1_arr_t, sen1_tags_t, sen2_arr_t, sen2_tags_t)
 	
