@@ -95,6 +95,8 @@ def printCheck(sentence, sen_arr, sen_tags):
 count = 0 
 file = 'englishEtiquetado_0_10000'
 
+output = open("wiki_sentences.txt", "a")
+
 with open(file) as f :
 	sen = []
 	sen_tags = []
@@ -108,7 +110,9 @@ with open(file) as f :
 			#print sen_tags
 			sentence = formSen(sen, sen_tags)
 			if printCheck(sentence, sen, sen_tags):
+				sentence = sentence.replace(',','').replace('-', '').replace('"', '').replace(':', '')
 				print sentence
+				output.write(sentence)
 			sen = []
 			sen_tags = []
 
