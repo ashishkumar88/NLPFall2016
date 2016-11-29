@@ -70,86 +70,73 @@ def breakConn(list):
 
 
 for line in file:
-    print 'in loop'
-
     if line == "\n":
-        print breakConn(temp_list)
-        print '\n\n\n'
+        #print breakConn(temp_list)
+        #print '\n\n\n'
         parse_list.append(breakConn(temp_list))
         temp_list = []
     else:
         line = line.replace("\n","")
         temp_list.append(line)
 
-print parse_list[0]
-
+#print parse_list
 for item in parse_list:
-    reg_one = re.compile('^nsubj.*')
-    reg_two = re.compile('^advcl.*')
-    reg_third = re.compile('^neg.*')
-    reg_fourth = re.compile('^(dobj|iobj|case).*')
+	reg_1F = re.compile('^nsubj.*')
+	reg_2F = re.compile('^(dobj|case|iobj).*')
+	reg_3F = re.compile('^neg.*')
+	reg_1E = re.compile('^nsubj.*')
+	reg_2E = re.compile('^(advcl|admod).*')
+	reg_3E = re.compile('^(dobj|iobj|case).*')
     
-    res1 = filter(reg_one.match,item)
-    res2 = filter(reg_two.match,item)
-    res3 = filter(reg_third.match,item)
-    res4 = filter(reg_fourth.match,item)
+	res1F = filter(reg_1F.match,item['front'])
+	res2F = filter(reg_2F.match,item['front'])
+	res3F = filter(reg_3F.match,item['front'])
+	res1E = filter(reg_1E.match,item['end'])
+	res2E = filter(reg_2E.match,item['end'])
+	res3E= filter(reg_3E.match,item['end'])
     
-    #print res1, res2
-    nsubj_1 = res1[0].split(',')[0].split('(')[1].split('-')[0]
-    nsubj_2 = res1[0].split(',')[1].split('-')[0]
-    print "first nsubj : ",nsubj_1,",",nsubj_2
-    advcl_1 = res2[0].split(',')[0].split('(')[1].split('-')[0]
-    advcl_2 = res2[0].split(',')[1].split('-')[0]
-    print "advcl : ", advcl_1,",",advcl_2
-    nsubj_1_1 = res1[1].split(',')[0].split('(')[1].split('-')[0]
-    nsubj_1_2 = res1[1].split(',')[1].split('-')[0]
-    print "second nsubj : ",nsubj_1_1,",",nsubj_1_2
-    dobj_1 = res4[0].split(',')[0].split('(')[1].split('-')[0]
-    dobj_2 = res4[0].split(',')[1].split('-')[0]
-    print "dobj : ", dobj_1,",",dobj_2
-    if len(res3) != 0:
-        neg_1 = res3[0].split(',')[0].split('(')[1].split('-')[0]
-        neg_2 = res3[0].split(',')[1].split('-')[0]
-            #print "neg : ",neg_1,",",neg_2
-    if len(res3) != 0:
-        str = nsubj_2+"."+advcl_2+" = false may cause execution of "+nsubj_1+" ["+nsubj_2+","+dobj_2+"]"
-    else:
-        str = nsubj_2+"."+advcl_2+" = true may cause execution of "+nsubj_1+" ["+nsubj_2+","+dobj_2+"]"
-    print str
-    fileOut.write(str+'\n')
+	if(len(res1F)==0 or len(res2F)==0 or len(res1E)==0 or (len(res2E)==0 and len(res3E)==0) ):	
+		print 'Missing dep,Knowledge not created!!'
+		continue
+	nsubj_1F_verb = res1F[0].split(',')[0].split('(')[1].split('-')[0]
+	nsubj_1F_agent = res1F[0].split(',')[1].split('-')[0]
 
+	if len(res2F) == 0:
+		print 'dobj does not exist!!'
+		continue
+	dobj_2F_tag = res2F[0].split('(');
+	if(dobj_2F_tag[0] == 'case'):
+		dobj_2F_object = res2F[0].split(',')[0].split('(')[1].split('-')[0]
+		dobj_2F_verb = res2F[0].split(',')[1].split('-')[0]
+	else:
+		dobj_2F_object = res2F[0].split(',')[0].split('(')[1].split('-')[0]
+		dobj_2F_verb = res2F[0].split(',')[1].split('-')[0]
+	
+			   
+	nsubj_1E_verb = res1E[0].split(',')[0].split('(')[1].split('-')[0]
+	nsubj_1E_agent = res1E[0].split(',')[1].split('-')[0]
+	
+	advcl_2E_verb = res2E[0].split(',')[0].split('(')[1].split('-')[0]
+	advcl_2E_prop = res2E[0].split(',')[1].split('-')[0]
+	if len(res3E) != 0:
+		dobj_3E_verb = res3E[0].split(',')[0].split('(')[1].split('-')[0]
+		dobj_3E_object = res3E[0].split(',')[1].split('-')[0]
+	    	if(nsubj_1E_verb == dobj_3E_verb):
+			prop =  dobj_3E_object
+	else:
+		prop = advcl_2E_prop    
 
+	agent = nsubj_1F_agent
+	object = dobj_2F_object
+	action = nsubj_1F_verb
+	propActor = nsubj_1E_agent
 
-
-###################
-#item = parse_list[2]
-#reg_one = re.compile('^nsubj.*')
-#reg_two = re.compile('^advcl.*')
-#reg_third = re.compile('^neg.*')
-#reg_fourth = re.compile('^dobj.*')
-#res1 = filter(reg_one.match,item)
-#res2 = filter(reg_two.match,item)
-#res3 = filter(reg_third.match,item)
-#res4 = filter(reg_fourth.match,item)
-#print res1, res2
-#nsubj_1 = res1[0].split(',')[0].split('(')[1].split('-')[0]
-#nsubj_2 = res1[0].split(',')[1].split('-')[0]
-#print "first nsubj : ",nsubj_1,",",nsubj_2
-#advcl_1 = res2[0].split(',')[0].split('(')[1].split('-')[0]
-#advcl_2 = res2[0].split(',')[1].split('-')[0]
-#print "advcl : ", advcl_1,",",advcl_2
-#nsubj_1_1 = res1[1].split(',')[0].split('(')[1].split('-')[0]
-#nsubj_1_2 = res1[1].split(',')[1].split('-')[0]
-#print "second nsubj : ",nsubj_1_1,",",nsubj_1_2
-#dobj_1 = res4[0].split(',')[0].split('(')[1].split('-')[0]
-#dobj_2 = res4[0].split(',')[1].split('-')[0]
-#print "dobj : ", dobj_1,",",dobj_2
-#if len(res3) != 0:
-#    neg_1 = res3[0].split(',')[0].split('(')[1].split('-')[0]
-#    neg_2 = res3[0].split(',')[1].split('-')[0]
-    #print "neg : ",neg_1,",",neg_2
-#if len(res3) != 0:
-#    str = nsubj_2+"."+advcl_1+" = false may cause execution of "+nsubj_1+" ["+nsubj_2+","+dobj_2+"]"
-#else:
-#    str = nsubj_2+"."+advcl_1+" = true may cause execution of "+nsubj_1+" ["+nsubj_2+","+dobj_2+"]"
-#print str
+	if(nsubj_1F_verb == advcl_2E_verb):
+		if len(res3F) != 0:
+			str = propActor+"."+prop+" = false may cause execution of "+action+" ["+agent+","+object+"]"
+	       	else:
+			str = propActor+"."+prop+" = true may cause execution of "+action+" ["+agent+","+object+"]"
+	   	print str
+		fileOut.write(str+'\n')
+	else:
+	        print 'knowledge not created!!'
