@@ -1,4 +1,4 @@
-# NLPFall2016
+# NLPFall2016 (This is the Phase 1 Code)
 This branch contains the implementation fo First Approach .
 check_ambiguity.py takes the POS tagged sentences from the corpus and returns unambigous lines.
 
